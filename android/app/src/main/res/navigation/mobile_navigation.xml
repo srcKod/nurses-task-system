@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.enursejobs.ui.fragment.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_caring"
+            app:destination="@id/nav_caring" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_caring"
+        android:name="com.example.enursejobs.ui.fragment.CaringFragment"
+        android:label="Caring" >
+        <argument
+            android:name="caringid"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_caring_to_nav_carings"
+            app:destination="@id/nav_carings"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_nurses"
+        android:name="com.example.enursejobs.ui.fragment.NurseListFragment"
+        android:label="@string/menu_nurses"
+        tools:layout="@layout/fragment_nurse_list" >
+        <action
+            android:id="@+id/action_nav_nurses_to_nav_nurse"
+            app:destination="@id/nav_nurse" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_nurse"
+        android:name="com.example.enursejobs.ui.fragment.NurseFragment"
+        tools:layout="@layout/fragment_nurse">
+        <argument
+            android:name="nurseid"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_nurse_to_nav_nurses"
+            app:destination="@id/nav_nurses"
+            app:popUpTo="@id/nav_nurses"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_caringtypes"
+        android:name="com.example.enursejobs.ui.fragment.CaringtypeListFragment"
+        android:label="@string/menu_caringtypes"
+        tools:layout="@layout/fragment_caringtype_list" >
+        <action
+            android:id="@+id/action_nav_caringtypes_to_nav_caringtype"
+            app:destination="@id/nav_caringtype" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_caringtype"
+        android:name="com.example.enursejobs.ui.fragment.CaringtypeFragment"
+        tools:layout="@layout/fragment_caringtype">
+        <argument
+            android:name="caringtypeid"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_caringtype_to_nav_caringtypes"
+            app:destination="@id/nav_caringtypes"
+            app:popUpTo="@id/nav_caringtypes"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_patients"
+        android:name="com.example.enursejobs.ui.fragment.PatientListFragment"
+        android:label="@string/menu_patients"
+        tools:layout="@layout/fragment_patient_list" >
+        <action
+            android:id="@+id/action_nav_patients_to_nav_patient"
+            app:destination="@id/nav_patient" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_patient"
+        android:name="com.example.enursejobs.ui.fragment.PatientFragment"
+        android:label="Patient"
+        tools:layout="@layout/fragment_patient" >
+        <argument
+            android:name="patientid"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_patient_to_nav_patients"
+            app:destination="@id/nav_patients" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_carings"
+        android:name="com.example.enursejobs.ui.fragment.CaringListFragment"
+        android:label="Carings"
+        tools:layout="@layout/fragment_caringtype_list" >
+        <action
+            android:id="@+id/action_caringListFragment_to_nav_caring"
+            app:destination="@id/nav_caring" />
+    </fragment>
+</navigation>

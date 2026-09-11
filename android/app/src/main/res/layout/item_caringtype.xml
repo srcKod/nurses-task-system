@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="caringtype"
+            type="com.example.enursejobs.db.model.Caringtype"/>
+        <variable name="CaringtypeCallBack"
+            type="com.example.enursejobs.ui.adapter.CaringtypeClickCallBack"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/caringtype_cardv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:minHeight="100dp"
+        android:onClick="@{() ->  CaringtypeCallBack.onClick(caringtype)}"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardUseCompatPadding="true">
+        <RelativeLayout
+            android:id="@+id/fragment_caringtype"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/caringtype_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/caringtype_name"
+                android:text="@{caringtype.name}"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/caringtype_description_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/caringtype_name_tv"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/caringtype_description"
+                android:text="@{caringtype.description}"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "000000000000",
+    "project_id": "enurse-app-placeholder",
+    "storage_bucket": "enurse-app-placeholder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:000000000000:android:5f981e90060b5941e740e9",
+        "android_client_info": {
+          "package_name": "com.example.enursejobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "YOUR-OAUTH-CLIENT-ID.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUMMY0000000000000000000000000000"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "YOUR-OAUTH-CLIENT-ID.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

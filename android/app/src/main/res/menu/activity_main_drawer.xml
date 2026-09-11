@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_nurses"
+            android:icon="@drawable/ic_menu_nurses"
+            android:title="@string/menu_nurses"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_caringtypes"
+            android:icon="@drawable/ic_menu_caringtypes"
+            android:title="@string/menu_caringtypes"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_patients"
+            android:icon="@drawable/ic_menu_patients"
+            android:title="@string/menu_patients"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_carings"
+            android:icon="@drawable/ic_menu_carings"
+            android:title="@string/menu_carings"
+            android:checkable="true"/>
+    </group>
+</menu>

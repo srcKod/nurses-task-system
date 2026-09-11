@@ -1,0 +1,146 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs'
+}
+
+// API base URL per build type. Override per machine without touching
+// build.gradle by adding to gradle.properties (or ~/.gradle/gradle.properties):
+//
+//   apiUrlDebug=http://192.168.1.50:8000/api/          # physical device on LAN
+//   apiUrlRelease=https://your-production.example.com/api/
+//
+// Defaults: debug talks to the emulator host machine (10.0.2.2); release
+// talks to the Wasmer Edge staging backend.
+def apiUrlDebug = project.findProperty('apiUrlDebug') ?: "http://10.0.2.2:8000/api/"
+def apiUrlRelease = project.findProperty('apiUrlRelease') ?: "https://nurses-task-system.wasmer.app/api/"
+
+android {
+    namespace 'com.example.enursejobs'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.enursejobs"
+        minSdk 26
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+//        ndk {
+//            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+//        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // Emulator reaches the host machine via 10.0.2.2. Cleartext HTTP is
+            // allowed for debug builds only (src/debug/AndroidManifest.xml).
+            buildConfigField "String", "API_URL", "\"${apiUrlDebug}\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // HTTPS staging backend (Wasmer Edge). Set apiUrlRelease in
+            // gradle.properties to point at your own instance.
+            buildConfigField "String", "API_URL", "\"${apiUrlRelease}\""
+            // CI builds release APKs unsigned by default, which makes them
+            // uninstallable. Sign with the debug key so a release APK from the
+            // workflow can be installed for testing. Swap for a real keystore
+            // before shipping to any store.
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError false
+    }
+
+    buildFeatures {
+//        viewBinding true
+        dataBinding true
+        buildConfig true
+    }
+    ndkVersion '25.0.8775105'
+}
+
+dependencies {
+    // Retrofit
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    // define a BOM and its version
+    implementation(platform('com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.14'))
+    // define any required OkHttp artifacts without version
+    implementation 'com.squareup.okhttp3:okhttp'
+    implementation 'com.squareup.okhttp3:logging-interceptor'
+
+    // Preferences DataStore
+    implementation 'androidx.datastore:datastore-preferences:1.1.1'
+    // optional - RxJava2 support
+    implementation 'androidx.datastore:datastore-preferences-rxjava2:1.1.1'
+
+    // Security library
+    implementation "androidx.security:security-crypto:1.0.0"
+    // For Identity Credential APIs
+    implementation "androidx.security:security-identity-credential:1.0.0-alpha03"
+    // For App Authentication APIs
+    implementation "androidx.security:security-app-authenticator:1.0.0-beta01"
+    // For App Authentication API testing
+    androidTestImplementation "androidx.security:security-app-authenticator:1.0.0-beta01"
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
+    // Room components
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+    implementation "androidx.room:room-guava:2.6.1"
+//    implementation "androidx.room:room-paging:2.5.1"
+    implementation "androidx.paging:paging-runtime:3.2.1"
+    implementation "androidx.paging:paging-guava:3.2.1"
+
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0'
+
+    // UI
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment:2.7.7'
+    implementation 'androidx.navigation:navigation-ui:2.7.7'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    // firebase
+    implementation  platform('com.google.firebase:firebase-bom:33.0.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-inappmessaging-display'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // other
+    implementation(platform('org.jetbrains.kotlin:kotlin-bom:1.9.24'))
+}

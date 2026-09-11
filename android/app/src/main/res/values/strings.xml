@@ -1,0 +1,91 @@
+<resources>
+    <!-- Application -->
+    <string name="app_name">E-Nurse Jobs</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">E-Nurse Jobs</string>
+    <string name="nav_header_subtitle1">COURSE-PLACEHOLDER</string>
+    <string name="nav_header_subtitle2">developer@example.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Menu Items -->
+    <string name="menu_home">Home</string>
+    <string name="menu_nurses">Nurses</string>
+    <string name="menu_nurse">Nurse</string>
+    <string name="menu_caringtypes">Caring Types</string>
+    <string name="menu_patients">Patients</string>
+    <string name="menu_carings">Carings</string>
+
+    <!-- LoginActivity -->
+    <string name="logo">E-Nurse Jobs</string>
+    <string name="email">type your email</string>
+    <string name="password">type your password</string>
+    <string name="login">Login</string>
+    <string name="Login_Failed_msg">Username or Password is not Correct</string>
+    <string name="Login_EmptyFields_msg">Username or Password Shouldn\'t Be Empty</string>
+
+    <!-- Card View Description -->
+    <string name="nurse_name">Nurse Name</string>
+    <string name="caringtype_name">Caringtype Name</string>
+    <string name="caring_name">Caring Name</string>
+    <string name="patient_name">Patient Name</string>
+
+    <!-- Nurse Fragment -->
+    <string name="getnurse">GetNurse</string>
+    <string name="nurse_email">Email</string>
+    <string name="nurse_phone">Phone</string>
+    <string name="nurse_gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="resigned">Resigned</string>
+    <string name="active">Active</string>
+    <string name="admin">Admin</string>
+    <string name="user">User</string>
+    <!-- Nurse List Fragment -->
+    <string name="loading_nurses">Loading Nurses</string>
+    <string name="nurse_list">Nurses List</string>
+
+    <!-- Caringtype Fragment -->
+    <string name="caringtype_description">Description</string>
+    <!-- Caringtype List Fragment -->
+    <string name="Caringtype_list">Caring type List</string>
+    <string name="loading_Caringtypes">Loading Caring types</string>
+
+    <!-- messages -->
+    <string name="success_Deleted_msg">Deleted Successfully</string>
+    <string name="failed_Deleted_msg">Delete Failed</string>
+    <string name="Empty_Field_error_msg">Empty Field</string>
+    <string name="success_update_msg">Updated Successfully</string>
+    <string name="Failed_update_msg">Update Failed</string>
+
+    <!-- buttons -->
+    <string name="BackBtn">Back</string>
+    <string name="updateBtn">Update</string>
+    <string name="deleteBtn">Delete</string>
+
+    <!-- Home Fragment -->
+    <string name="loading_carings">Loading Carings</string>
+    <string name="caring_list">Caring List</string>
+    <string name="caring_description">Caring Description</string>
+    <string name="caring_time">Caring Time</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="profile_email">Profile Email</string>
+    <string name="caring_status">Caring Status</string>
+    <string name="nurse_password">Nurse Password</string>
+    <string name="status_name">Status</string>
+
+    <!-- Patients List Fragment -->
+    <string name="loading_patients">Loading Patients</string>
+    <string name="patient_list">Patients List</string>
+    <string name="patient_roomFilePath">Room Photo Path</string>
+    <string name="patient_status">Patient Status</string>
+    <string name="patient_roomPhPath">Room Photo Path</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_about">About</string>
+    <string name="about_dialog">this app developed for COURSE-PLACEHOLDER-HW</string>
+    <string name="cancel">Cancel</string>
+    <string name="about">About</string>
+    <string name="accept">accept</string>
+
+</resources>

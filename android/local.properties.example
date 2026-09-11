@@ -1,0 +1,17 @@
+# local.properties.example
+#
+# Copy to local.properties and adjust the path before building with
+# Android Studio or Gradle:
+#
+#   cp local.properties.example local.properties
+#
+# local.properties is machine-specific (absolute SDK path) and is
+# gitignored — never commit it.
+#
+# Linux example:
+#   sdk.dir=/home/you/Android/Sdk
+# macOS example:
+#   sdk.dir=/Users/you/Library/Android/sdk
+# Windows example:
+#   sdk.dir=C\:\\Users\\you\\AppData\\Local\\Android\\Sdk
+sdk.dir=/path/to/your/Android/sdk

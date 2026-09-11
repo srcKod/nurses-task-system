@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="nurse"
+            type="com.example.enursejobs.db.model.Nurse"/>
+        <variable name="NurseCallBack"
+            type="com.example.enursejobs.ui.adapter.NurseClickCallBack"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/nurse_cardv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:minHeight="100dp"
+        android:onClick="@{() ->  NurseCallBack.onClick(nurse)}"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardUseCompatPadding="true">
+        <RelativeLayout
+            android:id="@+id/fragment_nurse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/nurse_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/nurse_name"
+                android:text="@{nurse.name}"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/nurse_email_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_below="@id/nurse_name_tv"
+                android:contentDescription="@string/nurse_email"
+                android:text="@{nurse.email}"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/nurse_phone_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_below="@id/nurse_email_tv"
+                android:contentDescription="@string/nurse_phone"
+                android:text="@{nurse.phone}"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

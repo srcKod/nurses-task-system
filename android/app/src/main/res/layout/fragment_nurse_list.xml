@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="NursesisLoading"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/nurseList_frg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/nurse_sv"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/Nurseloading_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/loading_nurses"
+            android:textAlignment="center"
+            app:visibleGone="@{NursesisLoading}" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nurse_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/nurse_list"
+            app:layoutManager="LinearLayoutManager"
+            app:visibleGone="@{!NursesisLoading}" />
+    </LinearLayout>
+</layout>
