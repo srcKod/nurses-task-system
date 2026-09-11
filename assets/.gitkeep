@@ -1,0 +1,4 @@
+# Placeholder. See ENURSE_PLAN.md §6 for what will live in this directory:
+# - docs/lessons/NN-<slug>.md  (one page per major lesson)
+# - docs/screenshots/*.png     (4-6 screenshots for the READMEs)
+# - docs/architecture.md       (one-page full-stack diagram)
