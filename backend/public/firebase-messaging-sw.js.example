@@ -1,0 +1,14 @@
+importScripts('https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js');
+
+firebase.initializeApp({
+    apiKey: "YOUR-FIREBASE-WEB-API-KEY-HERE",
+    projectId: "enurse-app-placeholder",
+    messagingSenderId: "000000000000",
+    appId: "1:000000000000:web:5050eece07a171c5e740e9"
+});
+
+const messaging = firebase.messaging();
+messaging.setBackgroundMessageHandler(function({data:{title,body,icon}}) {
+    return self.registration.showNotification(title,{body,icon});
+});

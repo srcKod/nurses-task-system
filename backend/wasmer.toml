@@ -1,0 +1,32 @@
+# Wasmer Edge package for the enurse Laravel backend.
+# Deploy:  wasmer deploy backend/
+# Local test: wasmer run backend/
+#
+# Wasmer Edge runs PHP as a serverless WebAssembly app.
+# Database: Wasmer built-in MySQL, auto-provisioned via capabilities.database
+# in app.yaml. The compiled workload does not expose the injected
+# DB_HOST/DB_PORT/DB_NAME/DB_USERNAME/DB_PASSWORD vars on this app, so the same
+# values also live in Wasmer app secrets at runtime; CI migrations use GitHub
+# secrets. App secrets (APP_KEY, JWT_SECRET, ...) come from Wasmer app secrets.
+
+[dependencies]
+"php/php" = "=8.3.4"
+
+[fs]
+"/app/" = "."
+
+[[command]]
+name = "run"
+module = "php/php:php"
+runner = "wasi"
+[command.annotations.wasi]
+main-args = ["-t", "/app/public", "-S", "localhost:8080"]
+
+# NOTE: keep exactly ONE [[command]] block here. Wasmer CLI 7.4.x picks the
+# package entrypoint automatically and fails with "Unable to determine the
+# package's entrypoint" when the manifest declares more than one command --
+# the deployed app then returns Wasmer's own 500 page for every request.
+# A second `artisan` command was added for a (since dropped) deploy job and
+# broke every deploy until it was removed (see BTL13 in ../KNOWN-ISSUES.md).
+# To run Artisan locally use the host PHP binary, not the package:
+#   cd backend && php artisan migrate --force

@@ -1,0 +1,30 @@
+kind: wasmer.io/App.v0
+name: nurses-task-system
+owner: srckod
+package: .
+
+scaling:
+  mode: single_concurrency
+
+env:
+  APP_ENV: production
+  APP_URL: https://nurses-task-system.wasmer.app
+
+capabilities:
+  database:
+    engine: mysql
+
+# Migrations are NOT run from here. Wasmer CLI 7.4.x compiles app.yaml into the
+# App.v1 spec and silently drops the whole `jobs:` section (verified with
+# `wasmer app deployment get ... -f json`: zero jobs in the compiled config), so
+# a post-deployment job never executes. The CI/CD workflow runs
+# `php artisan migrate --force && php artisan db:seed --force` against this
+# database after the deploy instead. See BTL12 in ../KNOWN-ISSUES.md.
+#
+# DB_HOST / DB_PORT / DB_NAME / DB_USERNAME / DB_PASSWORD are documented as
+# injected by capabilities.database, but on this app the compiled workload does
+# not expose them: real DB_* app secrets are load-bearing at runtime. Never
+# upload "${DB_HOST}"-style placeholders - an empty or self-referencing value
+# there breaks every request with "[2002] Operation not permitted"
+# (see BTL10/BTL11 in ../KNOWN-ISSUES.md). Check what the runtime actually gets
+# with: wasmer app deployment list nurses-task-system -f json

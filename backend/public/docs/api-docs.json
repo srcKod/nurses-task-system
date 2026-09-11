@@ -1,0 +1,1675 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "E-Nurse Api",
+        "description": "E-Nurse Api description",
+        "contact": {
+            "email": "developer@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "paths": {
+        "/api/carings": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Carings",
+                "description": "Get Carings",
+                "operationId": "getCarings",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No Carings was found"
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Create Caring",
+                "description": "Create Caring",
+                "operationId": "createCaring",
+                "requestBody": {
+                    "description": "Create Caring",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Caring"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Caring created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Caring"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Update Caring",
+                "description": "Update Caring",
+                "operationId": "updateCaring",
+                "requestBody": {
+                    "description": "Caring to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Caring"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Caring updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Caring"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "404": {
+                        "description": "A Caring with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/trashed": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Trashed Carings",
+                "description": "Get Trashed Carings",
+                "operationId": "getTrashed",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No Carings was found"
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Update Trashed Caring",
+                "description": "Update Trashed Caring",
+                "operationId": "updateTrashed",
+                "requestBody": {
+                    "description": "Trashed Caring to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Caring"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Caring updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Caring"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "404": {
+                        "description": "A Caring with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/trashed/{id}": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Trashed Caring",
+                "description": "Caring id should be provided",
+                "operationId": "restoreTrashed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Get Trashed Caring",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "A Caring with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/prune/{id}": {
+            "delete": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Prune Caring",
+                "description": "Prune Caring",
+                "operationId": "pruneCaring",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Caring--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "A Caring with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/{id}": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Caring",
+                "description": "Caring id should be provided",
+                "operationId": "getCaring",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Get Caring",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "A Caring with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Delete Caring",
+                "description": "Delete Caring",
+                "operationId": "deleteCaring",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Caring--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "A Caring with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/nurse/{nurse_id}": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Caring by nurse id",
+                "description": "Nurse id should be provided",
+                "operationId": "getByNurseId",
+                "parameters": [
+                    {
+                        "name": "nurse_id",
+                        "in": "path",
+                        "description": "Nurse Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Carings with the specified Nurse ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/caringtype/{caringtype_id}": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Caring by caringtype id",
+                "description": "caringtype id should be provided",
+                "operationId": "getByCaringTypeId",
+                "parameters": [
+                    {
+                        "name": "caringtype_id",
+                        "in": "path",
+                        "description": "CaringType Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Carings with the specified Caringtype ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/patient/{patient_id}": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Get Caring by patient id",
+                "description": "Patient id should be provided",
+                "operationId": "getByPatientId",
+                "parameters": [
+                    {
+                        "name": "patient_id",
+                        "in": "path",
+                        "description": "Patient Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Carings with the specified Patient ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/carings/check/{id}": {
+            "get": {
+                "tags": [
+                    "Caring"
+                ],
+                "summary": "Check Caring",
+                "description": "Patient id should be provided",
+                "operationId": "checkCaring",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Caring Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caring"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "A Patient with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/caringtypes": {
+            "get": {
+                "tags": [
+                    "Caringtype"
+                ],
+                "summary": "Get Caringtypes",
+                "description": "Get Caringtypes",
+                "operationId": "getCaringTypes",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caringtype"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Caringtype"
+                ],
+                "summary": "Create Caringtype",
+                "description": "Multiple values can be provided with comma separated string",
+                "operationId": "createCaringType",
+                "requestBody": {
+                    "description": "Caringtype to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Caringtype"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Caringtype created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Caringtype"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Caringtype"
+                ],
+                "summary": "Update Caringtype",
+                "description": "Update Caringtype",
+                "operationId": "updateCaringType",
+                "requestBody": {
+                    "description": "Caringtype to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Caringtype"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Caringtype updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Caringtype"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "404": {
+                        "description": "Caringtype not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/caringtypes/{id}": {
+            "get": {
+                "tags": [
+                    "Caringtype"
+                ],
+                "summary": "Get Caringtype",
+                "description": "Caringtype id should be provided",
+                "operationId": "getCaringType",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Caringtype Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Caringtype"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Caringtype not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Caringtype"
+                ],
+                "summary": "Delete Caringtype",
+                "description": "Delete Caringtype",
+                "operationId": "deleteCaringType",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Caringtype--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Caringtype not found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/nurses": {
+            "get": {
+                "tags": [
+                    "Nurse"
+                ],
+                "summary": "Get All Nurses",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "getNurses",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Nurse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Nurse"
+                ],
+                "summary": "Create Nurse",
+                "description": "Multiple values can be provided with comma separated string",
+                "operationId": "createNurse",
+                "requestBody": {
+                    "description": "Nurse to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Nurse"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Nurse created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Nurse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Nurse"
+                ],
+                "summary": "Update Nurse",
+                "description": "Update Nurse",
+                "operationId": "updateNurse",
+                "requestBody": {
+                    "description": "Nurse to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Nurse"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Nurse updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Nurse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "404": {
+                        "description": "Nurse not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/nurses/{id}": {
+            "get": {
+                "tags": [
+                    "Nurse"
+                ],
+                "summary": "Get Nurse",
+                "description": "Nurse id should be provided",
+                "operationId": "getNurse",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Get Nurse",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Nurse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Nurse"
+                ],
+                "summary": "Delete a Nurse",
+                "description": "Delete Nurse",
+                "operationId": "deleteNurse",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Nurse--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Nurse not found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients": {
+            "get": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Get Patients",
+                "description": "Multiple status values can be provided with comma separated string",
+                "operationId": "getPatients",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Patient"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No Patients was found"
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Create Patient",
+                "description": "Multiple values can be provided with comma separated string",
+                "operationId": "createPatient",
+                "requestBody": {
+                    "description": "Patient to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Patient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Patient created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Patient"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Update Patient",
+                "description": "Update Patient",
+                "operationId": "updatePatient",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Patient--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Patient to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Patient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Patient updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Patient"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "404": {
+                        "description": "A Patient with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/{id}": {
+            "get": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Get Patient",
+                "description": "Patient id should be provided",
+                "operationId": "getPatient",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Get Patient",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Patient"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "A Patient with the specified ID was not found."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Patient"
+                ],
+                "summary": "Delete Patient",
+                "description": "Delete Patient",
+                "operationId": "deletePatient",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Patient--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Nurse login",
+                "description": "Nurse login",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Nurse login",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "title": "Email",
+                                        "type": "string",
+                                        "example": "rami@example.com"
+                                    },
+                                    "password": {
+                                        "title": "Password",
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "login succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "title": "Access Token",
+                                            "type": "string",
+                                            "example": "20d338931e8d6bd9466edeba7dfsdasg8365ev7wa75opasSsa5698ea7dce7c7bc01aa5cc5b4735691c50a2fe3228"
+                                        },
+                                        "token_type": {
+                                            "title": "Token Type",
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "title": "Expire in",
+                                            "type": "integer",
+                                            "example": "3600"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register new Nurse",
+                "description": "Register new Nurse",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Register new Nurse",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Nurse"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registration succeeded"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Nurse logout",
+                "description": "Nurse logout",
+                "operationId": "logout",
+                "responses": {
+                    "201": {
+                        "description": "successfully signed out"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh token",
+                "description": "Refresh token",
+                "operationId": "refresh",
+                "responses": {
+                    "201": {
+                        "description": "Refresh succeeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "title": "Access Token",
+                                            "type": "string",
+                                            "example": "20d338931e8d6bd9466edeba7dfsdasg8365ev7wa75opasSsa5698ea7dce7c7bc01aa5cc5b4735691c50a2fe3228"
+                                        },
+                                        "token_type": {
+                                            "title": "Token Type",
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "title": "Expire in",
+                                            "type": "integer",
+                                            "example": "3600"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/nurseProfile": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Nurse Profile",
+                "description": "Nurse Profile",
+                "operationId": "nurseProfile",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Nurse": {
+                                            "$ref": "#/components/schemas/Nurse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Caring": {
+                "title": "Caring",
+                "description": "Caring",
+                "required": [
+                    "time"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Caring id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "time": {
+                        "title": "time",
+                        "description": "Caring time",
+                        "type": "timestamp",
+                        "example": "2023-04-16 05:04:01 PM"
+                    },
+                    "nurse_id": {
+                        "title": "nurse_id",
+                        "description": "Caring-Nurse",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "caringtype_id": {
+                        "title": "caringtype_id",
+                        "description": "Caring-CaringType",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "patient_id": {
+                        "title": "patient_id",
+                        "description": "Caring-Patient",
+                        "type": "integer",
+                        "example": "10"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Caring Description",
+                        "type": "string",
+                        "example": "Give Medicine"
+                    },
+                    "is_finished": {
+                        "title": "is_finished",
+                        "description": "Caring Status",
+                        "type": "boolean",
+                        "example": "0"
+                    }
+                },
+                "type": "object"
+            },
+            "Carings": {
+                "title": "Carings",
+                "properties": {
+                    "Nurse": {
+                        "title": "Carings",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Caring"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Caringtype": {
+                "title": "Caringtype",
+                "description": "Caringtype",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "Caringtype id",
+                        "description": "Caringtype id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Caringtype Name",
+                        "type": "string",
+                        "example": "Medication"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Caringtype Description",
+                        "type": "string",
+                        "example": "Give patient medication"
+                    }
+                },
+                "type": "object"
+            },
+            "Caringtypes": {
+                "title": "Caringtypes",
+                "properties": {
+                    "Caringtype": {
+                        "title": "Caringtypes",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Caringtype"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Nurse": {
+                "title": "Nurse",
+                "description": "Nurse",
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Nurse id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Nurse Name (Max:50)",
+                        "type": "string",
+                        "example": "ahmad"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Nurse Email (Should be Unique)",
+                        "type": "string",
+                        "example": "ahmad@example.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "Nurse password (Min:8)",
+                        "type": "string",
+                        "example": "12345678"
+                    },
+                    "gender": {
+                        "title": "gender",
+                        "description": "Nurse gender",
+                        "type": "boolean",
+                        "example": "1"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "Nurse phone",
+                        "type": "string",
+                        "example": "0999111222"
+                    },
+                    "is_resigned": {
+                        "title": "is_resigned",
+                        "description": "Resigning status",
+                        "type": "boolean",
+                        "example": "0"
+                    },
+                    "is_admin": {
+                        "title": "is_admin",
+                        "description": "Nurse Role (admin|user)",
+                        "type": "boolean",
+                        "example": "0"
+                    },
+                    "created_at": {
+                        "title": "Create Date",
+                        "description": "Create Date)",
+                        "type": "string",
+                        "example": "2023-04-19 12:37:32 PM"
+                    },
+                    "updated_at": {
+                        "title": "Update Date",
+                        "description": "Update Date",
+                        "type": "string",
+                        "example": "2023-04-19 10:37:32 AM"
+                    }
+                },
+                "type": "object"
+            },
+            "Nurses": {
+                "title": "Nurses",
+                "properties": {
+                    "Nurse": {
+                        "title": "Nurses",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Nurse"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Patient": {
+                "title": "Patient",
+                "description": "Patient",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Patient id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Patient Name",
+                        "type": "string",
+                        "example": "ahmad"
+                    },
+                    "room_photo_path": {
+                        "title": "room_photo_path",
+                        "description": "Patient Room Photo URL",
+                        "type": "string",
+                        "example": "https://example.com/img.png"
+                    },
+                    "is_stopped": {
+                        "title": "Status",
+                        "description": "Patient Status",
+                        "type": "boolean",
+                        "example": "0"
+                    }
+                },
+                "type": "object"
+            },
+            "Patients": {
+                "title": "Patients",
+                "properties": {
+                    "Patient": {
+                        "title": "Patients",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Patient"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "400": {
+                "description": "Bad Request"
+            },
+            "422": {
+                "description": "Validation exception"
+            }
+        },
+        "parameters": {
+            "Caring--id": {
+                "name": "id",
+                "in": "path",
+                "description": "Caring Id",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "1"
+                }
+            },
+            "Caringtype--id": {
+                "name": "id",
+                "in": "path",
+                "description": "Caringtype Id",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "1"
+                }
+            },
+            "Nurse--id": {
+                "name": "id",
+                "in": "path",
+                "description": "Nurse Id",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "1"
+                }
+            },
+            "Patient--id": {
+                "name": "id",
+                "in": "path",
+                "description": "Patient Id",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "1"
+                }
+            }
+        },
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
