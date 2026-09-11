@@ -1,0 +1,4 @@
+# Placeholder. CI is added in Phase 5 of ENURSE_PLAN.md, only if tests pass.
+# When added, this directory will contain:
+#   - backend.yml  (PHP 8.1, composer install, php artisan test, pint --test)
+#   - android.yml  (JDK 17, ./gradlew assembleDebug test)

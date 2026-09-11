@@ -1,0 +1,146 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend.yml'
+  workflow_dispatch:
+
+env:
+  # Run JS actions (checkout, setup-wasmer) on Node 24 instead of deprecated Node 20.
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  # ── CI: test ──────────────────────────────────────────────
+  test:
+    name: Test backend
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: enurse_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=5s
+          --health-timeout=10s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_mysql, sqlite, bcmath, ctype, json, xml, tokenizer, fileinfo, openssl, sodium, gd
+          coverage: none
+
+      - name: Setup Composer
+        uses: ramsey/composer-install@v3
+        with:
+          working-directory: ./backend
+          composer-options: --ignore-platform-req=php
+
+      - name: Build frontend assets
+        run: |
+          cd backend
+          npm ci
+          npm run build
+
+      - name: Copy env
+        run: |
+          cd backend
+          cp .env.example .env
+          echo 'DB_HOST=127.0.0.1' >> .env
+          echo 'DB_PORT=3306' >> .env
+          echo 'DB_DATABASE=enurse_test' >> .env
+          echo 'DB_USERNAME=root' >> .env
+          echo 'DB_PASSWORD=root' >> .env
+          php artisan key:generate --force
+
+      - name: Create test database
+        run: mysql -h 127.0.0.1 -u root -proot -e 'CREATE DATABASE IF NOT EXISTS enurse_test;'
+
+      - name: Migrate & seed
+        run: cd backend && php artisan migrate --force && php artisan db:seed --force
+
+      - name: Run tests
+        run: cd backend && php artisan test --no-coverage
+
+  # ── CD: deploy to Wasmer ──────────────────────────────────
+  deploy:
+    name: Deploy to Wasmer Edge
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    env:
+      # The Wasmer CLI reads its token from the environment, so one job-level
+      # variable authenticates every `wasmer` call below.
+      WASMER_TOKEN: ${{ secrets.WASMER_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Wasmer CLI
+        uses: wasmerio/setup-wasmer@v2
+
+      - name: Setup PHP (for composer)
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+          coverage: none
+
+      - name: Install Composer deps (production)
+        run: |
+          cd backend
+          composer install --ignore-platform-req=php --no-dev --optimize-autoloader
+
+      - name: Build frontend assets
+        run: |
+          cd backend
+          npm ci
+          npm run build
+
+      # Seeding runs on every deploy: this Wasmer app is a staging/demo
+      # environment for tests and feature validation, not real production, and
+      # the seeders truncate their tables before inserting. Deployment stays a
+      # config-only step - no application code is involved.
+      #
+      # `wasmer deploy` builds the package from wasmer.toml, uploads it and
+      # creates a new app version. --no-wait is deliberate: the CLI's
+      # reachability check would otherwise race the migration step below.
+      - name: Deploy to Wasmer Edge
+        run: |
+          cd backend
+          wasmer deploy --non-interactive --no-wait --no-persist-id
+
+      # The Wasmer database is reachable over the network, so migrations run
+      # from CI against it directly. app.yaml `jobs:` cannot be used: Wasmer CLI
+      # 7.4.x drops the jobs section when compiling to the App.v1 spec (BTL12).
+      #
+      # No .env is needed here - Laravel reads these process env vars directly,
+      # and Dotenv never overrides existing environment variables.
+      - name: Migrate & seed the Wasmer database
+        working-directory: backend
+        env:
+          APP_ENV: production
+          DB_CONNECTION: mysql
+          DB_HOST: ${{ secrets.WASMER_DB_HOST }}
+          DB_PORT: ${{ secrets.WASMER_DB_PORT }}
+          DB_DATABASE: ${{ secrets.WASMER_DB_DATABASE }}
+          DB_USERNAME: ${{ secrets.WASMER_DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.WASMER_DB_PASSWORD }}
+        run: |
+          php artisan migrate --force
+          php artisan db:seed --force

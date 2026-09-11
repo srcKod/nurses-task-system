@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a bug in the application code or docs
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. If this is a *new* bug not already listed in
+        [`KNOWN-ISSUES.md`](../KNOWN-ISSUES.md), please describe it below.
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: A short, one-line description
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where is the bug?
+      options:
+        - Backend (Laravel)
+        - Android (Java)
+        - Documentation (README, LEARNING, KNOWN-ISSUES, etc.)
+        - Not sure
+  - type: textarea
+    id: description
+    attributes:
+      label: What happens?
+      placeholder: A clear description of the bug, including steps to reproduce.
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      placeholder: OS, browser, device, screenshots, log output, anything that helps.

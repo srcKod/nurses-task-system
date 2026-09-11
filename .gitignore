@@ -1,0 +1,34 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+*~
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+
+# Per-project ignores live in:
+#   backend/.gitignore  (Laravel: /vendor, /node_modules, .env, storage/*.key, etc.)
+#   android/.gitignore  (Android: /build, /captures, local.properties, etc.)
+#
+# This file only covers things at the repo root that aren't part of either project.
+
+# Temporary or local-only files at the repo root
+*.tmp
+*.bak
+*.orig
+
+# Anything in docs/ that shouldn't be tracked
+# (Uncomment if you want to ignore draft screenshots before they're polished.)
+# docs/screenshots/*.tmp
+
+# tmp/ is a working area; only the original course-report DOCX is kept as historical reference
+tmp/*
+scripts/*
+!tmp/course-report.docx
+!tmp/.gitkeep
